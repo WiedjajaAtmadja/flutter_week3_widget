@@ -4,17 +4,32 @@ void main() {
   runApp(MainApp());
 }
 
-class MainApp extends StatelessWidget {
-  final questions = [
-    'What\'s your favorite color?',
-    'What\'s your favorite animal?'
-  ];
-  var questionIndex = 0;
+class MainApp extends StatefulWidget {
   MainApp({super.key});
 
-  void chooseAnswer() {
-    questionIndex = questionIndex + 1;
-    print(questionIndex);
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  final _questions = [
+    'When you go somewhere for the day, would you rather',
+    'If you were a teacher, would you rather teach',
+    'Are you usually',
+    'Do you more often let',
+  ];
+
+  var _questionIndex = 0;
+
+  void _chooseAnswer() {
+    setState(() {
+      if (_questionIndex < _questions.length - 1) {
+        _questionIndex++;
+      } else {
+        _questionIndex = 0;
+      }
+    });
+    debugPrint('questionIndex: $_questionIndex ');
   }
 
   @override
@@ -26,11 +41,11 @@ class MainApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: const Text('My First App From Scratch')),
         body: Column(children: [
-          const Text('The question'),
+          Text(_questions[_questionIndex]),
           ElevatedButton(
-              onPressed: chooseAnswer, child: const Text('Answer 1')),
+              onPressed: _chooseAnswer, child: const Text('Answer 1')),
           ElevatedButton(
-              onPressed: chooseAnswer, child: const Text('Answer 2')),
+              onPressed: _chooseAnswer, child: const Text('Answer 2')),
         ]),
       ),
       debugShowCheckedModeBanner: false,
