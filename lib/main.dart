@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final questions = [
+    'What\'s your favorite color?',
+    'What\'s your favorite animal?'
+  ];
+  var questionIndex = 0;
+  MainApp({super.key});
+
+  void chooseAnswer() {
+    questionIndex = questionIndex + 1;
+    print(questionIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,20 +25,13 @@ class MainApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(title: const Text('My First App From Scratch')),
-        body: const Center(child: Text('Hello World!')),
-        // body: Container(
-        //   color: Colors.green,
-        //   child: const Center(
-        //     child: Text(
-        //       'Hello World!',
-        //       style: TextStyle(
-        //         color: Colors.white,
-        //         fontSize: 30,
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        //     ),
-        //   ),
-        // )
+        body: Column(children: [
+          const Text('The question'),
+          ElevatedButton(
+              onPressed: chooseAnswer, child: const Text('Answer 1')),
+          ElevatedButton(
+              onPressed: chooseAnswer, child: const Text('Answer 2')),
+        ]),
       ),
       debugShowCheckedModeBanner: false,
     );
