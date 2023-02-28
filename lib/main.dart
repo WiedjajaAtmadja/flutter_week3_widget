@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'question.dart';
-// import 'answers.dart';
-import 'testWidget.dart';
+import 'test_widget.dart';
+import 'result.dart';
 
 void main() {
   runApp(const MainApp());
@@ -15,34 +14,6 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  /*
-  final _questionanswerss = [
-    {
-      'question': 'What\'s your favorite color?',
-      'answerss': ['Black', 'Red', 'Green', 'White'],
-    },
-    {
-      'question': 'What\'s your favorite animal?',
-      'answerss': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
-    },
-    {
-      'question': 'When you go somewhere for the day, would you rather',
-      'answerss': ['Plan what you will do and when', 'Just go!'],
-    },
-    {
-      'question': 'If you were a teacher, would you rather teach',
-      'answerss': ['Math', 'Science', 'History', 'English'],
-    },
-    {
-      'question': 'Are you usually',
-      'answerss': ['A morning person', 'An evening person'],
-    },
-    {
-      'question': 'Do you more often let',
-      'answerss': ['Your heart lead you', 'Your head lead you'],
-    }
-  ];
-*/
   final _questionAnswersMap = [
     {
       'question': 'When you go somewhere for the day, would you rather',
@@ -83,7 +54,8 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  void _chooseanswers() {
+  void _chooseAnswers(int score) {
+    _totalScore += score;
     setState(() {
       _questionIndex++;
     });
@@ -98,20 +70,14 @@ class _MainAppState extends State<MainApp> {
         primarySwatch: Colors.green,
       ),
       home: Scaffold(
-        appBar: AppBar(title: const Text('My First App From Scratch')),
-        body: _questionIndex < _questionAnswersMap.length
-            ? TestWidget(
-                questionAnswers: _questionAnswersMap,
-                questionIndex: _questionIndex,
-                chooseAnswer: _chooseanswers,
-              )
-            : const Center(
-                child: Text(
-                  'My Personality Type is',
-                  style: TextStyle(fontSize: 28),
-                ),
-              ),
-      ),
+          appBar: AppBar(title: const Text('My First App From Scratch')),
+          body: _questionIndex < _questionAnswersMap.length
+              ? TestWidget(
+                  questionAnswers: _questionAnswersMap,
+                  questionIndex: _questionIndex,
+                  chooseAnswerFunc: _chooseAnswers,
+                )
+              : Result(_totalScore, _resetQuiz)),
       debugShowCheckedModeBanner: false,
     );
   }
