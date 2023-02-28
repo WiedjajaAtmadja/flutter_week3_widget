@@ -3,7 +3,7 @@ import 'question.dart';
 import 'answer.dart';
 
 class TestWidget extends StatelessWidget {
-  final List<Map<String, Object>> questionAnswers;
+  final List questionAnswers;
   final int questionIndex;
   final VoidCallback chooseAnswer;
 
@@ -18,10 +18,9 @@ class TestWidget extends StatelessWidget {
     return Column(
       children: [
         Question(questionAnswers[questionIndex]['question'] as String),
-        ...(questionAnswers[questionIndex]['answer'] as List<String>)
-            .map((answer) {
-          print(answer);
-          return Answer(chooseAnswer, answer);
+        ...(questionAnswers[questionIndex]['answers'] as List).map((answer) {
+          // print(answer);
+          return Answer(chooseAnswer, answer['text']);
         }).toList(),
       ],
     );

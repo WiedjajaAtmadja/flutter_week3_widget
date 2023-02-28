@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'question.dart';
-// import 'answer.dart';
+// import 'answers.dart';
 import 'testWidget.dart';
 
 void main() {
@@ -15,33 +15,64 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  final _questionAnswers = [
+  /*
+  final _questionanswerss = [
     {
       'question': 'What\'s your favorite color?',
-      'answers': ['Black', 'Red', 'Green', 'White'],
+      'answerss': ['Black', 'Red', 'Green', 'White'],
     },
     {
       'question': 'What\'s your favorite animal?',
-      'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
+      'answerss': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
     },
     {
       'question': 'When you go somewhere for the day, would you rather',
-      'answers': ['Plan what you will do and when', 'Just go!'],
+      'answerss': ['Plan what you will do and when', 'Just go!'],
     },
     {
       'question': 'If you were a teacher, would you rather teach',
-      'answers': ['Math', 'Science', 'History', 'English'],
+      'answerss': ['Math', 'Science', 'History', 'English'],
     },
     {
       'question': 'Are you usually',
-      'answers': ['A morning person', 'An evening person'],
+      'answerss': ['A morning person', 'An evening person'],
     },
     {
       'question': 'Do you more often let',
-      'answers': ['Your heart lead you', 'Your head lead you'],
+      'answerss': ['Your heart lead you', 'Your head lead you'],
     }
   ];
-
+*/
+  final _questionAnswersMap = [
+    {
+      'question': 'When you go somewhere for the day, would you rather',
+      'answers': [
+        {'text': 'Plan what you will do and when', 'score': 2},
+        {'text': 'Just go!', 'score': 2},
+      ],
+    },
+    {
+      'question': 'If you were a teacher, would you rather teach',
+      'answers': [
+        {'text': 'Facts-based courses', 'score': 2},
+        {'text': 'Courses involving opinion or theory', 'score': 2},
+      ],
+    },
+    {
+      'question': 'Are you usually',
+      'answers': [
+        {'text': 'A "good mixer" with groups of people', 'score': 2},
+        {'text': 'Rather quiet and reserved', 'score': 2},
+      ],
+    },
+    {
+      'question': 'Do you more often let',
+      'answers': [
+        {'text': 'Your heart rule your head', 'score': 1},
+        {'text': 'Your head rule your heart', 'score': 2},
+      ],
+    },
+  ];
   var _questionIndex = 0;
   var _totalScore = 0;
 
@@ -52,7 +83,7 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  void _chooseAnswer() {
+  void _chooseanswers() {
     setState(() {
       _questionIndex++;
     });
@@ -68,11 +99,11 @@ class _MainAppState extends State<MainApp> {
       ),
       home: Scaffold(
         appBar: AppBar(title: const Text('My First App From Scratch')),
-        body: _questionIndex < _questionAnswers.length
+        body: _questionIndex < _questionAnswersMap.length
             ? TestWidget(
-                questionAnswers: _questionAnswers,
+                questionAnswers: _questionAnswersMap,
                 questionIndex: _questionIndex,
-                chooseAnswer: _chooseAnswer,
+                chooseAnswer: _chooseanswers,
               )
             : const Center(
                 child: Text(
