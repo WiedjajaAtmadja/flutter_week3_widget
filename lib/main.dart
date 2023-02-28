@@ -42,8 +42,17 @@ class _MainAppState extends State<MainApp> {
   ];
 
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _chooseAnswer() {
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _chooseAnswer(int score) {
+    _totalScore += score;
     setState(() {
       _questionIndex++;
     });
