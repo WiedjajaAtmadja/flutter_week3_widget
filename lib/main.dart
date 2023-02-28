@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
-import 'answer.dart';
+// import 'question.dart';
+// import 'answer.dart';
+import 'testWidget.dart';
 
 void main() {
   runApp(const MainApp());
@@ -51,8 +52,7 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  void _chooseAnswer(int score) {
-    _totalScore += score;
+  void _chooseAnswer() {
     setState(() {
       _questionIndex++;
     });
@@ -69,13 +69,11 @@ class _MainAppState extends State<MainApp> {
       home: Scaffold(
         appBar: AppBar(title: const Text('My First App From Scratch')),
         body: _questionIndex < _questionAnswers.length
-            ? Column(children: [
-                Question(
-                    _questionAnswers[_questionIndex]['question'] as String),
-                ...(_questionAnswers[_questionIndex]['answers'] as List<String>)
-                    .map((answer) => Answer(_chooseAnswer, answer))
-                    .toList()
-              ])
+            ? TestWidget(
+                questionAnswers: _questionAnswers,
+                questionIndex: _questionIndex,
+                chooseAnswer: _chooseAnswer,
+              )
             : const Center(
                 child: Text(
                   'My Personality Type is',
