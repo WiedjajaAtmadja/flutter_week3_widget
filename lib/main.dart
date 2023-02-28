@@ -14,7 +14,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  final _question_answers = [
+  final _questionAnswers = [
     {
       'question': 'What\'s your favorite color?',
       'answers': ['Black', 'Red', 'Green', 'White'],
@@ -45,11 +45,7 @@ class _MainAppState extends State<MainApp> {
 
   void _chooseAnswer() {
     setState(() {
-      if (_questionIndex < _question_answers.length - 1) {
-        _questionIndex++;
-      } else {
-        _questionIndex = 0;
-      }
+      _questionIndex++;
     });
     debugPrint('questionIndex: $_questionIndex ');
   }
@@ -63,16 +59,20 @@ class _MainAppState extends State<MainApp> {
       ),
       home: Scaffold(
         appBar: AppBar(title: const Text('My First App From Scratch')),
-        body: Column(children: [
-          // Text(_questions[_questionIndex]),
-          Question(_question_answers[_questionIndex]['question'] as String),
-          // ElevatedButton(
-          //     onPressed: _chooseAnswer, child: const Text('Answer 1')),
-          // ElevatedButton(
-          //     onPressed: _chooseAnswer, child: const Text('Answer 2')),
-          Answer(_chooseAnswer, 'Answer 1'),
-          Answer(_chooseAnswer, 'Answer 2'),
-        ]),
+        body: _questionIndex < _questionAnswers.length
+            ? Column(children: [
+                Question(
+                    _questionAnswers[_questionIndex]['question'] as String),
+                ...(_questionAnswers[_questionIndex]['answers'] as List<String>)
+                    .map((answer) => Answer(_chooseAnswer, answer))
+                    .toList()
+              ])
+            : const Center(
+                child: Text(
+                  'My Personality Type is',
+                  style: TextStyle(fontSize: 28),
+                ),
+              ),
       ),
       debugShowCheckedModeBanner: false,
     );
